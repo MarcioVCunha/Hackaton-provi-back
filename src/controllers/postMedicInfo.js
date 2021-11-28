@@ -1,8 +1,6 @@
 import connection from "../database/database.js";
 
 const postMedicInfo = async (req, res) => {
-  console.log(req.body);
-
   try {
     const id = await connection.query(`
       SELECT
@@ -30,8 +28,6 @@ const postMedicInfo = async (req, res) => {
       WHERE
         user_id = $1;
     `, [id.rows[0].user_id]);
-
-    console.log(id.rows[0].user_id);
 
     if (isThereRegistration.rowCount === 0) {
       await connection.query(`

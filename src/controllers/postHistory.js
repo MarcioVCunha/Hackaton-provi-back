@@ -43,7 +43,7 @@ const postHistory = async (req, res) => {
           history
         ORDER BY
           id
-        ASC LIMIT 1;
+        DESC LIMIT 1;
       `);
 
       await connection.query(`
