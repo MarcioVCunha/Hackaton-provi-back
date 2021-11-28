@@ -28,8 +28,8 @@ CREATE TABLE "medic" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL UNIQUE,
 	"specialization" TEXT NOT NULL,
-	"address" bigint NOT NULL,
-	"address_number" bigint NOT NULL,
+	"address" TEXT NOT NULL,
+	"address_number" integer NOT NULL,
 	CONSTRAINT "medic_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -129,7 +129,7 @@ ALTER TABLE "sessions" ADD CONSTRAINT "sessions_fk0" FOREIGN KEY ("user_id") REF
 
 ALTER TABLE "medic" ADD CONSTRAINT "medic_fk0" FOREIGN KEY ("user_id") REFERENCES "users"("id");
 
-ALTER TABLE "medic_localization" ADD CONSTRAINT "medic_localization_fk0" FOREIGN KEY ("medic_id") REFERENCES "medic"("id");
+ALTER TABLE "medic_localization" ADD CONSTRAINT "medic_localization_fk0" FOREIGN KEY ("medic_id") REFERENCES "medic"("user_id");
 ALTER TABLE "medic_localization" ADD CONSTRAINT "medic_localization_fk1" FOREIGN KEY ("city_id") REFERENCES "cities"("id");
 ALTER TABLE "medic_localization" ADD CONSTRAINT "medic_localization_fk2" FOREIGN KEY ("state_id") REFERENCES "states"("id");
 
@@ -141,7 +141,7 @@ ALTER TABLE "patient_history" ADD CONSTRAINT "patient_history_fk0" FOREIGN KEY (
 ALTER TABLE "patient_history" ADD CONSTRAINT "patient_history_fk1" FOREIGN KEY ("history_id") REFERENCES "history"("id");
 
 
-ALTER TABLE "avaliations" ADD CONSTRAINT "avaliations_fk0" FOREIGN KEY ("medic_id") REFERENCES "medic"("id");
+ALTER TABLE "avaliations" ADD CONSTRAINT "avaliations_fk0" FOREIGN KEY ("medic_id") REFERENCES "medic"("user_id");
 ALTER TABLE "avaliations" ADD CONSTRAINT "avaliations_fk1" FOREIGN KEY ("user_id") REFERENCES "users"("id");
 
 
