@@ -4,6 +4,8 @@ CREATE TABLE "users" (
 	"type" integer NOT NULL,
 	"email" TEXT NOT NULL UNIQUE,
 	"password" TEXT NOT NULL UNIQUE,
+	"phone" TEXT UNIQUE,
+	"CRM" TEXT UNIQUE,
 	CONSTRAINT "users_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -26,7 +28,8 @@ CREATE TABLE "medic" (
 	"id" serial NOT NULL,
 	"user_id" integer NOT NULL UNIQUE,
 	"specialization" TEXT NOT NULL,
-	"crm" integer(6) NOT NULL UNIQUE,
+	"address" bigint NOT NULL,
+	"address_number" bigint NOT NULL,
 	CONSTRAINT "medic_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -112,6 +115,7 @@ CREATE TABLE "avaliations" (
 
 CREATE TABLE "preventions" (
 	"id" serial NOT NULL,
+	"name" TEXT NOT NULL UNIQUE,
 	"text" TEXT NOT NULL,
 	CONSTRAINT "preventions_pk" PRIMARY KEY ("id")
 ) WITH (
@@ -139,3 +143,16 @@ ALTER TABLE "patient_history" ADD CONSTRAINT "patient_history_fk1" FOREIGN KEY (
 
 ALTER TABLE "avaliations" ADD CONSTRAINT "avaliations_fk0" FOREIGN KEY ("medic_id") REFERENCES "medic"("id");
 ALTER TABLE "avaliations" ADD CONSTRAINT "avaliations_fk1" FOREIGN KEY ("user_id") REFERENCES "users"("id");
+
+
+
+
+
+
+
+
+
+
+
+
+
